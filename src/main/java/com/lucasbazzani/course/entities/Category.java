@@ -1,5 +1,7 @@
 package com.lucasbazzani.course.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -15,8 +17,8 @@ public class Category implements Serializable {
     private Long id;
     private String name;
 
-    //não utiliza List por não ser possível um produto ter duas vezes a mesma categoria.
-    @Transient
+    @JsonIgnore
+    @ManyToMany(mappedBy = "categories")
     private Set<Product> products = new HashSet<>();
 
     public Category () {
